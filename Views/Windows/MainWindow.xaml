@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Главная" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        
+        <StackPanel Orientation="Vertical">
+       
+        <DataGrid x:Name="UserGrid" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Имя пользователя"  Binding="{Binding UserName}"/>
+                <DataGridTextColumn Header="Пaроль" Binding="{Binding Password}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+            <StackPanel Orientation="Horizontal">
+            <Button x:Name="EditButton" Content="Редактировать" Margin="5" Click="EditButton_Click"/>
+            <Button x:Name="RemoveButton" Content="Удалить" Margin="5" Click="RemoveButton_Click"/>
+            <Button x:Name="WordButton" Content="Создать Word файл" Margin="5" Click="WordButton_Click"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

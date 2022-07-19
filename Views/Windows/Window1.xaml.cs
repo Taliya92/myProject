@@ -12,6 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using System.Text.Json;
+using myProject.Models;
 
 namespace myProject
 {
@@ -27,6 +30,29 @@ namespace myProject
 
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
+            //1. проверить существует файл users.json
+            //2. считать файл
+            //3. привод json к list
+            //4. проверить существование пользователя
+            //5. если существует, осуществить переход на MainWindow
+            string path = $"{Environment.CurrentDirectory}/users.json";
+            if (File.Exists(path))
+            {
+                string data = File.ReadAllText(path);
+                List<User> users = JsonSerializer.Deserialize<List<User>>(data);
+                User currentUser = users.FirstOrDefault(c=>c.UserName==LoginBox.Text&&
+                c.Password==PasswordBox.Text);
+                if (currentUser!=null)
+                {
+                    MainWindow mainWindow = new MainWindow();
+                    this.Hide();
+                    mainWindow.ShowDialog();
+                    this.Show();
+                }
+
+            }
+
+
 
         }
 
